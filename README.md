@@ -2,6 +2,9 @@
 
 *Implementation of logistics models/algorithms using Rust, WebAssembly and VueJS*  
 
+Depends on WebAssembly library 'rlog', per default residing in `../pkg`.
+
+
 ## Project setup
 ```
 npm install
