@@ -1,29 +1,21 @@
 <template>
-  <div class="demandData">
-    <table id="demandsTable">
-      <thead>
-        <tr>
-          <th>Periode</th>
-          <th>Nachfrage</th>
-          <th>Vorhergesagte Nachfrage</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="p in demand_data.periods" v-bind:key="p">
-          <td>{{ p.ind }}</td>
-          <td>{{ p.demand }}</td>
-          <td>{{ p.demand_estimated }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <DataTable id="demandData" :value="demand_data.periods" :paginator="true" :rows="12">
+      <Column field="ind" header="Periode"></Column>
+    <Column field="demand" header="Nachfrage"></Column>
+    <Column field="demand_estimated" header="Geschätzte Nachfrage"></Column>
+    </DataTable>
 </template>
 
 <script>
+import DataTable from 'primevue/datatable/sfc';
+import Column from 'primevue/column/sfc';
 export default {
   name: "DemandData",
   props: {
     demand_data: {},
   },
+  components: {
+    DataTable, Column
+  }
 };
 </script>
