@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="p in periods" v-bind:key="p">
+        <tr v-for="p in demand_data.periods" v-bind:key="p">
         <td>{{ p.ind }} </td>
           <td>{{ p.demand }}</td>
           <td>{{ p.demand_estimated }}</td>
@@ -28,7 +28,7 @@ export default {
   name: "App",
   data() {
     return {
-      periods: {},
+      demand_data: {},
     };
   },
   methods: {
@@ -41,9 +41,10 @@ export default {
         return console.warn("Rlog library couldn't be loaded. " + err);
       }
     },
-    getPeriods() {
+    getDemandData() {
       this.importRlog().then(() => {
-        this.periods = this.rlog.demand();
+        this.demand_data = this.rlog.smooth(30, 2.5, 0.2, 50);
+        console.log(this.demand_data)
       });
     },
   },
@@ -51,7 +52,7 @@ export default {
     HelloWorld,
   },
   created() {
-    this.getPeriods();
+    this.getDemandData();
   },
 };
 </script>
