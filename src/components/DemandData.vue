@@ -1,5 +1,5 @@
 <template>
-  <div class="demand-data">
+  <div class="demandData">
     <table id="demandsTable">
       <thead>
         <tr>
@@ -22,6 +22,8 @@
 <script>
 export default {
   name: "DemandData",
-  props: ['demand_data']
+  props: {
+    demand_data: {},
+  },
 };
 </script>

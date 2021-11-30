@@ -3,12 +3,14 @@
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
     <DemandData :demand_data="demand_data"/>
+    <DemandPlot :demand_data="demand_data"/>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import DemandData from "./components/DemandData.vue";
+import DemandPlot from "./components/DemandPlot.vue";
 
 export default {
   name: "App",
@@ -29,13 +31,14 @@ export default {
     },
     getDemandData() {
       this.importRlog().then(() => {
-        this.demand_data = this.rlog.smooth(30, 2.5, 0.2, 50);
+        this.demand_data = this.rlog.smooth(30, 3, 0.5, 50);
       });
     },
   },
   components: {
     HelloWorld,
     DemandData,
+    DemandPlot
   },
   created() {
     this.getDemandData();
