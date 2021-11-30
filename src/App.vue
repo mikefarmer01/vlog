@@ -2,27 +2,13 @@
   <div>
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
-    <table id="demandsTable">
-      <thead>
-        <tr>
-          <th>Periode</th>
-          <th>Nachfrage</th>
-          <th>Vorhergesagte Nachfrage</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="p in demand_data.periods" v-bind:key="p">
-        <td>{{ p.ind }} </td>
-          <td>{{ p.demand }}</td>
-          <td>{{ p.demand_estimated }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <DemandData :demand_data="demand_data"/>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
+import DemandData from "./components/DemandData.vue";
 
 export default {
   name: "App",
@@ -44,12 +30,12 @@ export default {
     getDemandData() {
       this.importRlog().then(() => {
         this.demand_data = this.rlog.smooth(30, 2.5, 0.2, 50);
-        console.log(this.demand_data)
       });
     },
   },
   components: {
     HelloWorld,
+    DemandData,
   },
   created() {
     this.getDemandData();
