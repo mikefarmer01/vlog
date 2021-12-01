@@ -2,12 +2,19 @@
   <div id="app">
     <div class="app-container">
       <TabMenu :model="menu" />
-      <Splitter style="height: 300px">
-        <SplitterPanel>
-          <DemandData :demand_data="demand_data" />
+      <Splitter style="height: 800px">
+        <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
+          <Splitter layout="vertical">
+            <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
+              <DemandParams />
+            </SplitterPanel>
+            <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
+              <DemandPlot :demand_data="demand_data" />
+            </SplitterPanel>
+          </Splitter>
         </SplitterPanel>
-        <SplitterPanel>
-          <DemandPlot :demand_data="demand_data" />
+        <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
+          <DemandData :demand_data="demand_data" />
         </SplitterPanel>
       </Splitter>
     </div>
@@ -18,6 +25,7 @@
 import TabMenu from "primevue/tabmenu/sfc";
 import Splitter from "primevue/splitter/sfc";
 import SplitterPanel from "primevue/splitterpanel/sfc";
+import DemandParams from "./components/DemandParams.vue";
 import DemandData from "./components/DemandData.vue";
 import DemandPlot from "./components/DemandPlot.vue";
 
@@ -51,6 +59,7 @@ export default {
   },
   components: {
     TabMenu,
+    DemandParams,
     DemandData,
     DemandPlot,
     Splitter,
@@ -64,17 +73,17 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-top: 60px;
 }
 .app-container {
-  text-align: center;
+  text-align: left;
 }
 body #app .p-button {
-  margin-left: .2em;
+  margin-left: 0.2em;
 }
 form {
   margin-top: 2em;
