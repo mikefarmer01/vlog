@@ -2,7 +2,7 @@
   <div>
     <div>
       <FieldSet
-        legend="Parameter der Normalverteilung"
+        legend="Parameter der Nachfrage"
         :toggleable="true"
       >
         <div class="formgrid grid">
@@ -28,10 +28,21 @@
               class="inputfield w-full"
             />
           </div>
+          <div
+            class="field col col-fixed"
+            style="width: 200px"
+          >
+            <label for="paramsPeriodCount">Periodenzahl</label>
+            <InputText
+              id="paramsPeriodCount"
+              v-model.number="store.demandParams.period_count"
+              class="inputfield w-full"
+            />
+          </div>
         </div>
       </FieldSet>
       <FieldSet
-        legend="Parameter der exponentiellen Glättung"
+        legend="Parameter der Nachfrageprognose"
         :toggleable="true"
       >
         <div class="formgrid grid">

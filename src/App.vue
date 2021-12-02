@@ -41,12 +41,13 @@ const menu = [
 import("rlog").then((rlog) => {
   store.$subscribe((mutation) => {
     if (mutation.events.key in store.demandParams) {
-      //TODO: Add period count to demandParams.
       //TODO: Discombine rlog's `smooth` method.
       try {
-        var demandData = rlog.smooth(store.demandParams.mean, store.demandParams.std_dev, store.demandParams.alpha, 50)
-      } catch(err) {
-          console.error(err)
+        var demandData = rlog.smooth(store.demandParams.mean, store.demandParams.std_dev, store.demandParams.alpha, store.demandParams.period_count)
+      } catch (err) {
+        //TODO: Instead indicate in UI that something's not right.
+        // Alternatively, validate params.
+        console.error(err)
       }
       store.setDemandData(demandData)
     }

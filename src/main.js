@@ -17,6 +17,7 @@ export const useStore = defineStore('store', {
     demandParams: {
       mean: 30,
       std_dev: 2,
+      period_count: 50,
       alpha: 0.2
     },
     demandData: {}
