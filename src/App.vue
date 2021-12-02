@@ -21,7 +21,9 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue'
+
 import TabMenu from 'primevue/tabmenu/sfc'
 import Splitter from 'primevue/splitter/sfc'
 import SplitterPanel from 'primevue/splitterpanel/sfc'
@@ -29,46 +31,39 @@ import DemandParams from './components/DemandParams.vue'
 import DemandData from './components/DemandData.vue'
 import DemandPlot from './components/DemandPlot.vue'
 
+const menu = [
+  { label: 'Exponentielle Glättung', icon: 'pi pi-fw pi-home' },
+  { label: 'Beer Game', icon: 'pi pi-fw pi-calendar' },
+  { label: 'System', icon: 'pi pi-fw pi-pencil' }
+]
+const demandData = ref({})
+
+</script>
+
+<script>
 export default {
   name: 'App',
-  components: {
-    TabMenu,
-    DemandParams,
-    DemandData,
-    DemandPlot,
-    Splitter,
-    SplitterPanel
-  },
-  data () {
-    return {
-      menu: [
-        { label: 'Exponentielle Glättung', icon: 'pi pi-fw pi-home' },
-        { label: 'Beer Game', icon: 'pi pi-fw pi-calendar' },
-        { label: 'System', icon: 'pi pi-fw pi-pencil' }
-      ],
-      demandData: {}
-    }
-  },
-  created () {
+  created() {
     this.getDemandData()
   },
   methods: {
-    async importRlog () {
+    async importRlog() {
       try {
-        const rlog = await import('rlog')
-        console.log('Rlog library loaded successfully.')
-        this.rlog = rlog
+        const rlog = await import("rlog");
+        console.log("Rlog library loaded successfully.");
+        this.rlog = rlog;
       } catch (err) {
-        return console.warn("Rlog library couldn't be loaded. " + err)
+        return console.warn("Rlog library couldn't be loaded. " + err);
       }
     },
-    getDemandData () {
+    getDemandData() {
       this.importRlog().then(() => {
-        this.demandData = this.rlog.smooth(30, 3, 0.5, 100)
-      })
-    }
+        this.demandData = this.rlog.smooth(30, 3, 0.5, 100);
+      });
+    },
   }
 }
+
 </script>
 
 <style>
