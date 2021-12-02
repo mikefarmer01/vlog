@@ -53,23 +53,12 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import InputText from 'primevue/inputtext/sfc'
 import FieldSet from 'primevue/fieldset/sfc'
-export default {
-  name: 'DemandParams',
-  components: {
-    InputText, FieldSet
-  },
-  data () {
-    return {
-      mean: 30,
-      std_dev: 2,
-      alpha: 0.5
-    }
-  }
-}
-</script>
 
-<style scoped>
-</style>
+const mean = 30
+const std_dev = 2
+const alpha = 0.5
+
+</script>

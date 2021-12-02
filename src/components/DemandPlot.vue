@@ -2,19 +2,13 @@
   <canvas id="demandPlot" />
 </template>
 
-<script>
-export default {
-  name: 'DemandPlot',
-  props: {
+<script setup>
+const props = defineProps({
     demandData: {
       type: Object,
       default() {
         return {}
       }
-    }
-  }
-}
+    } 
+  })
 </script>
-
-<style>
-</style>
