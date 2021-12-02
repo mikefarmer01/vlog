@@ -12,13 +12,14 @@ import 'primeicons/primeicons.css' // icons
 // #region Pinia store
 import { createPinia, defineStore } from 'pinia'
 
-export const store = defineStore('store', {
+export const useStore = defineStore('store', {
   state: () => ({
     demandParams: {
       mean: 30,
       std_dev: 2,
       alpha: 0.2
-    }
+    },
+    demandData: {}
   }),
   actions: {
     setDemandParams (demandParams) {
@@ -32,6 +33,9 @@ export const store = defineStore('store', {
     },
     setDemandParamAlpha (alpha) {
       this.demandParams.alpha = alpha
+    },
+    setDemandData (demandData) {
+      this.demandData = demandData
     }
   }
 })

@@ -13,7 +13,7 @@
             <label for="paramsMean">Mittlere Nachfrage</label>
             <InputText
               id="paramsMean"
-              v-model.number="mean"
+              v-model.number="store.demandParams.mean"
               class="inputfield w-full"
             />
           </div>
@@ -24,7 +24,7 @@
             <label for="paramsStdDev">Standardabweichung</label>
             <InputText
               id="paramsStdDev"
-              v-model.number="std_dev"
+              v-model.number="store.demandParams.std_dev"
               class="inputfield w-full"
             />
           </div>
@@ -42,7 +42,7 @@
             <label for="paramsAlpha">Alpha</label>
             <InputText
               id="paramsAlpha"
-              v-model.number="alpha"
+              v-model.number="store.demandParams.alpha"
               class="inputfield w-full"
             />
           </div>
@@ -57,8 +57,7 @@
 import InputText from 'primevue/inputtext/sfc'
 import FieldSet from 'primevue/fieldset/sfc'
 
-const mean = 30
-const std_dev = 2
-const alpha = 0.5
+import { useStore } from '@/main'
+const store = useStore()
 
 </script>

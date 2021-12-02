@@ -9,12 +9,12 @@
               <DemandParams />
             </SplitterPanel>
             <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
-              <DemandPlot :demand-data="demandData" />
+              <DemandPlot />
             </SplitterPanel>
           </Splitter>
         </SplitterPanel>
         <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
-          <DemandData :demand-data="demandData" />
+          <DemandData />
         </SplitterPanel>
       </Splitter>
     </div>
@@ -22,7 +22,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 
 import TabMenu from 'primevue/tabmenu/sfc'
 import Splitter from 'primevue/splitter/sfc'
@@ -31,40 +30,32 @@ import DemandParams from './components/DemandParams.vue'
 import DemandData from './components/DemandData.vue'
 import DemandPlot from './components/DemandPlot.vue'
 
+import { useStore } from '@/main'
+const store = useStore()
+
 const menu = [
   { label: 'Exponentielle Glättung', icon: 'pi pi-fw pi-home' },
   { label: 'Beer Game', icon: 'pi pi-fw pi-calendar' },
   { label: 'System', icon: 'pi pi-fw pi-pencil' }
 ]
-const demandData = ref({})
-
-</script>
-
-<script>
-export default {
-  name: 'App',
-  created() {
-    this.getDemandData()
-  },
-  methods: {
-    async importRlog() {
+import("rlog").then((rlog) => {
+  store.$subscribe((mutation) => {
+    if (mutation.events.key in store.demandParams) {
+      //TODO: Add period count to demandParams.
+      //TODO: Discombine rlog's `smooth` method.
       try {
-        const rlog = await import("rlog");
-        console.log("Rlog library loaded successfully.");
-        this.rlog = rlog;
-      } catch (err) {
-        return console.warn("Rlog library couldn't be loaded. " + err);
+        var demandData = rlog.smooth(store.demandParams.mean, store.demandParams.std_dev, store.demandParams.alpha, 50)
+      } catch(err) {
+          console.error(err)
       }
-    },
-    getDemandData() {
-      this.importRlog().then(() => {
-        this.demandData = this.rlog.smooth(30, 3, 0.5, 100);
-      });
-    },
-  }
-}
+      store.setDemandData(demandData)
+    }
+  })
+
+});
 
 </script>
+
 
 <style>
 #app {
