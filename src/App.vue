@@ -9,12 +9,12 @@
               <DemandParams />
             </SplitterPanel>
             <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
-              <DemandPlot :demand_data="demand_data" />
+              <DemandPlot :demand-data="demandData" />
             </SplitterPanel>
           </Splitter>
         </SplitterPanel>
         <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
-          <DemandData :demand_data="demand_data" />
+          <DemandData :demand-data="demandData" />
         </SplitterPanel>
       </Splitter>
     </div>
@@ -46,7 +46,7 @@ export default {
         { label: 'Beer Game', icon: 'pi pi-fw pi-calendar' },
         { label: 'System', icon: 'pi pi-fw pi-pencil' }
       ],
-      demand_data: {}
+      demandData: {}
     }
   },
   created () {
@@ -64,7 +64,7 @@ export default {
     },
     getDemandData () {
       this.importRlog().then(() => {
-        this.demand_data = this.rlog.smooth(30, 3, 0.5, 100)
+        this.demandData = this.rlog.smooth(30, 3, 0.5, 100)
       })
     }
   }

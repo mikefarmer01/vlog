@@ -6,7 +6,12 @@
 export default {
   name: 'DemandPlot',
   props: {
-    demand_data: {}
+    demandData: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
   }
 }
 </script>

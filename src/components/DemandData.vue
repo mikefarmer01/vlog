@@ -1,7 +1,7 @@
 <template>
   <DataTable
-    id="demandData"
-    :value="demand_data.periods"
+    id="demandDataTable"
+    :value="demandData.periods"
     :paginator="true"
     :rows="12"
   >
@@ -25,6 +25,11 @@ import DataTable from 'primevue/datatable/sfc'
 import Column from 'primevue/column/sfc'
 
 const props = defineProps({
-  demand_data: {}
+  demandData: {
+    type: Object,
+    default() {
+      return {}
+    }
+  }
 })
 </script>
