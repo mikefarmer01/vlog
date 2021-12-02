@@ -1,14 +1,14 @@
 <template>
-  <canvas id="demandPlot"> </canvas>
+  <canvas id="demandPlot" />
 </template>
 
 <script>
 export default {
-  name: "DemandPlot",
+  name: 'DemandPlot',
   props: {
-    demand_data: {},
-  },
-};
+    demand_data: {}
+  }
+}
 </script>
 
 <style>
