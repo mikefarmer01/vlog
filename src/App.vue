@@ -39,21 +39,27 @@ const menu = [
   { label: 'System', icon: 'pi pi-fw pi-pencil' }
 ]
 import("rlog").then((rlog) => {
+  //ensure standard smoothing happens and is displayed on component initialization
+  trySmooth(rlog)
   store.$subscribe((mutation) => {
     if (mutation.events.key in store.demandParams) {
-      //TODO: Discombine rlog's `smooth` method.
-      try {
-        var demandData = rlog.smooth(store.demandParams.mean, store.demandParams.std_dev, store.demandParams.alpha, store.demandParams.period_count)
-      } catch (err) {
-        //TODO: Instead indicate in UI that something's not right.
-        // Alternatively, validate params.
-        console.error(err)
-      }
-      store.setDemandData(demandData)
+      trySmooth(rlog)
     }
   })
 
 });
+
+function trySmooth(rlog) {
+  //TODO: Discombine rlog's `smooth` method.
+  try {
+    var demandData = rlog.smooth(store.demandParams.mean, store.demandParams.std_dev, store.demandParams.alpha, store.demandParams.period_count)
+  } catch (err) {
+    //TODO: Instead indicate in UI that something's not right.
+    // Alternatively, validate params.
+    console.error(err)
+  }
+  store.setDemandData(demandData)
+}
 
 </script>
 
