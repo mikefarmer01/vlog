@@ -3,12 +3,9 @@ module.exports = {
   env: {
     node: true
   },
-  'extends': [
+  extends: [
     'plugin:vue/vue3-recommended',
   ],
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
   rules: {
     //TODO
     //'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

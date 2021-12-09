@@ -68,7 +68,7 @@
 import InputText from 'primevue/inputtext/sfc'
 import FieldSet from 'primevue/fieldset/sfc'
 
-import { useStore } from '@/main'
+import { useStore } from '/src/store'
 const store = useStore()
 
 </script>

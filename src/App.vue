@@ -30,7 +30,7 @@ import DemandParams from './components/DemandParams.vue'
 import DemandData from './components/DemandData.vue'
 import DemandPlot from './components/DemandPlot.vue'
 
-import { useStore } from '@/main'
+import { useStore } from '/src/store'
 const store = useStore()
 
 const menu = [
@@ -38,27 +38,37 @@ const menu = [
   { label: 'Beer Game', icon: 'pi pi-fw pi-calendar' },
   { label: 'System', icon: 'pi pi-fw pi-pencil' }
 ]
-import("rlog").then((rlog) => {
-  //ensure standard smoothing happens and is displayed on component initialization
+
+import init from '../../pkg/rlog'
+run();
+
+async function run() {
+  let rlog = await init()
   trySmooth(rlog)
+  tryPlot(rlog)
   store.$subscribe((mutation) => {
     if (mutation.events.key in store.demandParams) {
       trySmooth(rlog)
+      tryPlot(rlog)
     }
   })
-
-});
+}
 
 function trySmooth(rlog) {
-  //TODO: Discombine rlog's `smooth` method.
   try {
     var demandData = rlog.smooth(store.demandParams.mean, store.demandParams.std_dev, store.demandParams.alpha, store.demandParams.period_count)
+    store.setDemandData(demandData)
   } catch (err) {
-    //TODO: Instead indicate in UI that something's not right.
-    // Alternatively, validate params.
     console.error(err)
   }
-  store.setDemandData(demandData)
+}
+
+function tryPlot(rlog) {
+  try {
+    rlog.plot(store.demandData.demands)
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 </script>

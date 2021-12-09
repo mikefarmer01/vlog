@@ -1,12 +1,12 @@
 <template>
   <DataTable
     id="demandDataTable"
-    :value="store.demandData.periods"
+    :value="store.demandData.demandPeriods"
     :paginator="true"
     :rows="12"
   >
     <Column
-      field="ind"
+      field="period"
       header="Periode"
     />
     <Column
@@ -24,7 +24,7 @@
 import DataTable from 'primevue/datatable/sfc'
 import Column from 'primevue/column/sfc'
 
-import { useStore } from '@/main'
+import { useStore } from '/src/store'
 const store = useStore()
 
 </script>
