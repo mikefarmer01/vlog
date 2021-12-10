@@ -1,0 +1,1 @@
+export interface DemandParams { mean: number; std_dev: number; period_count: number; alpha: number }

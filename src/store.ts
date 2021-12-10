@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 
-import { empty, withPeriods } from '/src/DemandData'
+import { DemandData, empty, withPeriods } from './DemandData'
+import { DemandParams } from './DemandParams'
 
 export const useStore = defineStore('store', {
   state: () => ({
@@ -13,19 +14,19 @@ export const useStore = defineStore('store', {
     demandData: empty()
   }),
   actions: {
-    setDemandParams (demandParams) {
+    setDemandParams (demandParams: DemandParams) {
       this.demandParams = demandParams
     },
-    setDemandParamMean (mean) {
+    setDemandParamMean (mean: number) {
       this.demandParams.mean = mean
     },
-    setDemandParamStdDev (std_dev) {
+    setDemandParamStdDev (std_dev: number) {
       this.demandParams.std_dev = std_dev
     },
-    setDemandParamAlpha (alpha) {
+    setDemandParamAlpha (alpha: number) {
       this.demandParams.alpha = alpha
     },
-    setDemandData (demandData) {
+    setDemandData (demandData: DemandData) {
       demandData.demandPeriods = withPeriods(demandData)
       this.demandData = demandData
     },
