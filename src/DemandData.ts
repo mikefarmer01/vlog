@@ -9,14 +9,14 @@ class DemandPeriod {
     }
 }
 
-export interface DemandData {
+export interface IDemandData {
     periods: [number],
     demands: [number],
     demands_estimated: [number]
     demandPeriods: DemandPeriod[]
 }
 
-export function withPeriods(arrObjDemandData: DemandData) {
+export function withPeriods(arrObjDemandData: IDemandData) {
     const o = arrObjDemandData
     const arrDemandPeriods = []
     for (const i in o.periods) {
@@ -26,7 +26,7 @@ export function withPeriods(arrObjDemandData: DemandData) {
 }
 
 export function empty() {
-    const emptyDemandData: DemandData = {
+    const emptyDemandData: IDemandData = {
         periods: [0],
         demands: [0],
         demands_estimated: [0],

@@ -64,11 +64,12 @@
   </div>
 </template>
 
-<script setup>
-import InputText from 'primevue/inputtext/sfc'
+<script setup lang="ts">
+
+//TODO: BUUUUG
 import FieldSet from 'primevue/fieldset/sfc'
 
-import { useStore } from '/src/store'
+import { useStore } from '../store'
 const store = useStore()
 
 </script>

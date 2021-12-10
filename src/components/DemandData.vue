@@ -20,11 +20,9 @@
   </DataTable>
 </template>
 
-<script setup>
-import DataTable from 'primevue/datatable/sfc'
-import Column from 'primevue/column/sfc'
+<script setup lang="ts">
 
-import { useStore } from '/src/store'
+import { useStore } from '../store'
 const store = useStore()
 
 </script>

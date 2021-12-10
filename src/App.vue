@@ -21,16 +21,9 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
-import TabMenu from 'primevue/tabmenu/sfc'
-import Splitter from 'primevue/splitter/sfc'
-import SplitterPanel from 'primevue/splitterpanel/sfc'
-import DemandParams from './components/DemandParams.vue'
-import DemandData from './components/DemandData.vue'
-import DemandPlot from './components/DemandPlot.vue'
-
-import { useStore } from '/src/store'
+import { useStore } from './store'
 const store = useStore()
 
 const menu = [
@@ -39,7 +32,7 @@ const menu = [
   { label: 'System', icon: 'pi pi-fw pi-pencil' }
 ]
 
-import init from '../../pkg/rlog'
+import init, { InitOutput, IDemandData } from '../../pkg/rlog'
 run();
 
 async function run() {
@@ -54,18 +47,20 @@ async function run() {
   })
 }
 
-function trySmooth(rlog) {
+function trySmooth(rlog: InitOutput) {
   try {
-    var demandData = rlog.smooth(store.demandParams.mean, store.demandParams.std_dev, store.demandParams.alpha, store.demandParams.period_count)
+    var demandData : IDemandData = rlog.smooth(store.demandParams.mean, store.demandParams.std_dev, store.demandParams.alpha, store.demandParams.period_count)
     store.setDemandData(demandData)
   } catch (err) {
     console.error(err)
   }
 }
 
-function tryPlot(rlog) {
+function tryPlot(rlog: InitOutput) {
   try {
-    rlog.plot(store.demandData.demands)
+    rlog.plot(store.demandData.demands, "demandPlot")
+    //TODO: Implement canvas backend sharing in the rust backend so that the seconds plot doesn't overwrite the first one.
+    //rlog.plot(store.demandData.demands_estimated, "demandPlot")
   } catch (err) {
     console.error(err)
   }

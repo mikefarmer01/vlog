@@ -1,6 +1,8 @@
 <template>
-  <canvas id="demandPlot" />
+  <canvas
+    id="demandPlot"
+  />
 </template>
 
-<script setup>
+<script setup lang="ts">
 </script>

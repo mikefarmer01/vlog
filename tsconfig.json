@@ -6,7 +6,9 @@
       // this enables stricter inference for data properties on `this`
       "strict": true,
       "jsx": "preserve",
-      "moduleResolution": "node"
+      "moduleResolution": "node",
+      // https://vitejs.dev/guide/features.html#typescript-compiler-options
+      "isolatedModules": true
     }
   }
   

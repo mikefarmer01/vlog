@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
+import { markRaw } from 'vue'
 
-import { DemandData, empty, withPeriods } from './DemandData'
+import { IDemandData, empty, withPeriods } from './DemandData'
 import { DemandParams } from './DemandParams'
 
 export const useStore = defineStore('store', {
@@ -26,9 +27,9 @@ export const useStore = defineStore('store', {
     setDemandParamAlpha (alpha: number) {
       this.demandParams.alpha = alpha
     },
-    setDemandData (demandData: DemandData) {
+    setDemandData (demandData: IDemandData) {
       demandData.demandPeriods = withPeriods(demandData)
-      this.demandData = demandData
+      this.demandData = markRaw(demandData)
     },
   }
 })
