@@ -32,7 +32,7 @@ const menu = [
   { label: 'System', icon: 'pi pi-fw pi-pencil' }
 ]
 
-import { RlogHandler } from './rlog_handler'
+import { RlogHandler } from './RlogHandler'
 let rlogHandler = new RlogHandler("demandPlot", [25, 255, 215], [140, 155, 0]);
 run();
 
@@ -44,9 +44,12 @@ async function run() {
     let key = mutation.events.key
     switch (key) {
       case ('alpha'):
+        rlogHandler.resmooth()
         rlogHandler.plot()
         break;
-      case (key in store.demandParams):
+      case ('mean'):
+      case ('std_dev'):
+      case ('period_count'):
         rlogHandler.smooth()
         rlogHandler.plot()
         break;

@@ -24,7 +24,6 @@ export class RlogHandler {
     try {
       this.rlog.clear(this.canvas_name);
       this.rlog.plot(this.store.demandData.demands, "demandPlot", this.demandsColor)
-      //TODO: Implement canvas backend sharing in the rust backend so that the seconds plot doesn't overwrite the first one.
       this.rlog.plot(this.store.demandData.demands_estimated, "demandPlot", this.demandsEstimatedColor)
     } catch (err) {
       console.error(err)
@@ -33,6 +32,14 @@ export class RlogHandler {
   smooth() {
     try {
       const demandData: IDemandData = this.rlog.smooth(this.store.demandParams.mean, this.store.demandParams.std_dev, this.store.demandParams.alpha, this.store.demandParams.period_count)
+      this.store.setDemandData(demandData)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+  resmooth() {
+    try {
+      const demandData: IDemandData = this.rlog.resmooth(this.store.demandParams.alpha, this.store.demandData.demands)
       this.store.setDemandData(demandData)
     } catch (err) {
       console.error(err)
