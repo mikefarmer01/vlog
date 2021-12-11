@@ -24,7 +24,7 @@
 <script setup lang="ts">
 
 import { useStore } from './store'
-const store = useStore()
+let store = useStore()
 
 const menu = [
   { label: 'Exponentielle Glättung', icon: 'pi pi-fw pi-home' },
@@ -32,38 +32,26 @@ const menu = [
   { label: 'System', icon: 'pi pi-fw pi-pencil' }
 ]
 
-import init, { InitOutput, IDemandData } from '../../pkg/rlog'
+import { RlogHandler } from './rlog_handler'
+let rlogHandler = new RlogHandler("demandPlot", [25, 255, 215], [140, 155, 0]);
 run();
 
 async function run() {
-  let rlog = await init()
-  trySmooth(rlog)
-  tryPlot(rlog)
+  await rlogHandler.load()
+  rlogHandler.smooth()
+  rlogHandler.plot()
   store.$subscribe((mutation) => {
-    if (mutation.events.key in store.demandParams) {
-      trySmooth(rlog)
-      tryPlot(rlog)
+    let key = mutation.events.key
+    switch (key) {
+      case ('alpha'):
+        rlogHandler.plot()
+        break;
+      case (key in store.demandParams):
+        rlogHandler.smooth()
+        rlogHandler.plot()
+        break;
     }
   })
-}
-
-function trySmooth(rlog: InitOutput) {
-  try {
-    var demandData : IDemandData = rlog.smooth(store.demandParams.mean, store.demandParams.std_dev, store.demandParams.alpha, store.demandParams.period_count)
-    store.setDemandData(demandData)
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-function tryPlot(rlog: InitOutput) {
-  try {
-    rlog.plot(store.demandData.demands, "demandPlot")
-    //TODO: Implement canvas backend sharing in the rust backend so that the seconds plot doesn't overwrite the first one.
-    //rlog.plot(store.demandData.demands_estimated, "demandPlot")
-  } catch (err) {
-    console.error(err)
-  }
 }
 
 </script>
