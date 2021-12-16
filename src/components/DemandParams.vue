@@ -13,7 +13,7 @@
             <label for="paramsMean">Mittlere Nachfrage</label>
             <InputText
               id="paramsMean"
-              v-model.number="store.demandParams.mean"
+              v-model.number="mean"
               class="inputfield w-full"
             />
           </div>
@@ -24,7 +24,7 @@
             <label for="paramsStdDev">Standardabweichung</label>
             <InputText
               id="paramsStdDev"
-              v-model.number="store.demandParams.std_dev"
+              v-model.number="std_dev"
               class="inputfield w-full"
             />
           </div>
@@ -35,7 +35,7 @@
             <label for="paramsPeriodCount">Periodenzahl</label>
             <InputText
               id="paramsPeriodCount"
-              v-model.number="store.demandParams.period_count"
+              v-model.number="period_count"
               class="inputfield w-full"
             />
           </div>
@@ -53,7 +53,7 @@
             <label for="paramsAlpha">Alpha</label>
             <InputText
               id="paramsAlpha"
-              v-model.number="store.demandParams.alpha"
+              v-model.number="alpha"
               class="inputfield w-full"
             />
           </div>
@@ -68,8 +68,36 @@
 
 //TODO: BUUUUG
 import FieldSet from 'primevue/fieldset/sfc'
+import { computed } from 'vue'
 
 import { useStore } from '../store'
 const store = useStore()
+
+//#region Computed properties
+const mean = computed({
+  get: () => store.demandParams.mean,
+  set: (val: number) => {
+    store.setDemandParamMean(val)
+  }
+})
+const std_dev = computed({
+  get: () => store.demandParams.std_dev,
+  set: (val: number) => {
+    store.setDemandParamStdDev(val)
+  }
+})
+const period_count = computed({
+  get: () => store.demandParams.period_count,
+  set: (val: number) => {
+    store.setDemandParamPeriodCount(val)
+  }
+})
+const alpha = computed({
+  get: () => store.demandParams.alpha,
+  set: (val: number) => {
+    store.setDemandParamAlpha(val)
+  }
+})
+//#endregion
 
 </script>
