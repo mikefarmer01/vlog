@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <div class="app-container">
-      <TabMenu :model="menu" />
+      <TabMenu
+        :model="menu"
+        style="margin-bottom: 1em"
+      />
       <Splitter style="height: 800px">
         <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
           <Splitter layout="vertical">
