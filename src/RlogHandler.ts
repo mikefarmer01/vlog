@@ -30,14 +30,22 @@ export class RlogHandler {
     const dp = this.store.demandParams;
     console.debug('Smoothing with demand parameters:')
     console.debug(dp)
-    const demandData = await this.rlog.smooth(dp.mean, dp.std_dev, dp.alpha, dp.period_count);
+    const promDemandData = this.rlog.smooth(dp.mean, dp.std_dev, dp.alpha, dp.period_count);
+    promDemandData.catch((error) => {
+      console.warn(error)
+    })
+    const demandData = await promDemandData
     this.store.setDemandData(demandData);
     console.debug('Smoothed.');
   }
   async resmooth() {
     console.debug('Resmoothing with demand parameters:')
     console.debug(this.store.demandParams)
-    const demandData = await this.rlog.resmooth(this.store.demandParams.alpha, this.store.demandData.demands);
+    const promDemandData = this.rlog.resmooth(this.store.demandParams.alpha, this.store.demandData.demands);
+    promDemandData.catch((error) => {
+      console.warn(error)
+    })
+    const demandData = await promDemandData
     this.store.setDemandData(demandData);
     console.debug('Resmoothed.');
   }
