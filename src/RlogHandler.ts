@@ -1,4 +1,4 @@
-import init, { InitOutput, IDemandData } from '../../pkg/rlog'
+import init, { InitOutput } from '../../pkg/rlog'
 import { useStore } from './store'
 
 export class RlogHandler {
@@ -20,30 +20,26 @@ export class RlogHandler {
     return this.rlog;
   }
 
-  plot() {
-    try {
-      this.rlog.clear(this.canvas_name);
-      this.rlog.plot(this.store.demandData.demands, "demandPlot", this.demandsColor)
-      this.rlog.plot(this.store.demandData.demands_estimated, "demandPlot", this.demandsEstimatedColor)
-    } catch (err) {
-      console.error(err)
-    }
+  async plot() {
+    console.debug('Plotting demand data.')
+    await this.rlog.clear(this.canvas_name);
+    this.rlog.plot(this.store.demandData.demands, "demandPlot", this.demandsColor);
+    this.rlog.plot(this.store.demandData.demands_estimated, "demandPlot", this.demandsEstimatedColor);
   }
-  smooth() {
-    try {
-      const demandData: IDemandData = this.rlog.smooth(this.store.demandParams.mean, this.store.demandParams.std_dev, this.store.demandParams.alpha, this.store.demandParams.period_count)
-      this.store.setDemandData(demandData)
-    } catch (err) {
-      console.error(err)
-    }
+  async smooth() {
+    const dp = this.store.demandParams;
+    console.debug('Smoothing with demand parameters:')
+    console.debug(dp)
+    const demandData = await this.rlog.smooth(dp.mean, dp.std_dev, dp.alpha, dp.period_count);
+    this.store.setDemandData(demandData);
+    console.debug('Smoothed.');
   }
-  resmooth() {
-    try {
-      const demandData: IDemandData = this.rlog.resmooth(this.store.demandParams.alpha, this.store.demandData.demands)
-      this.store.setDemandData(demandData)
-    } catch (err) {
-      console.error(err)
-    }
+  async resmooth() {
+    console.debug('Resmoothing with demand parameters:')
+    console.debug(this.store.demandParams)
+    const demandData = await this.rlog.resmooth(this.store.demandParams.alpha, this.store.demandData.demands);
+    this.store.setDemandData(demandData);
+    console.debug('Resmoothed.');
   }
 
 }

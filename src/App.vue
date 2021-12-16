@@ -38,23 +38,27 @@ run();
 
 async function run() {
   await rlogHandler.load()
-  rlogHandler.smooth()
+  await rlogHandler.smooth()
   rlogHandler.plot()
-  store.$subscribe((mutation) => {
-    let key = mutation.events.key
-    switch (key) {
-      case ('alpha'):
-        rlogHandler.resmooth()
-        rlogHandler.plot()
+  store.$onAction(paramChangeAction)
+}
+
+//TODO: Handle bad params error.
+function paramChangeAction({ name , after }) {
+  after(async () => {
+    switch (name) {
+      case 'setDemandParamMean':
+      case 'setDemandParamStdDev':
+      case 'setDemandParamPeriodCount':
+        await rlogHandler.smooth();
+        rlogHandler.plot();
         break;
-      case ('mean'):
-      case ('std_dev'):
-      case ('period_count'):
-        rlogHandler.smooth()
-        rlogHandler.plot()
+      case 'setDemandParamAlpha':
+        await rlogHandler.resmooth();
+        rlogHandler.plot();
         break;
     }
-  })
+  });
 }
 
 </script>
