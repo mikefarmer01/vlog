@@ -27,6 +27,9 @@ export const useStore = defineStore('store', {
     setDemandParamAlpha (alpha: number) {
       this.demandParams.alpha = alpha
     },
+    setDemandParamPeriodCount (period_count: number) {
+      this.demandParams.period_count = period_count
+    },
     setDemandData (demandData: IDemandData) {
       demandData.demandPeriods = withPeriods(demandData)
       this.demandData = markRaw(demandData)
