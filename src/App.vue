@@ -2,24 +2,10 @@
   <div id="app">
     <div class="app-container">
       <TabMenu
-        :model="menu"
+        :model="menuItems"
         style="margin-bottom: 1em"
       />
-      <Splitter style="height: 800px">
-        <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
-          <Splitter layout="vertical">
-            <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
-              <DemandParams />
-            </SplitterPanel>
-            <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
-              <DemandPlot />
-            </SplitterPanel>
-          </Splitter>
-        </SplitterPanel>
-        <SplitterPanel class="p-d-flex p-ai-center p-jc-center">
-          <DemandData />
-        </SplitterPanel>
-      </Splitter>
+      <router-view />
     </div>
   </div>
 </template>
@@ -29,10 +15,10 @@
 import { useStore } from './store'
 let store = useStore()
 
-const menu = [
-  { label: 'Exponentielle Glättung', icon: 'pi pi-fw pi-home' },
-  { label: 'Beer Game', icon: 'pi pi-fw pi-calendar' },
-  { label: 'System', icon: 'pi pi-fw pi-pencil' }
+const menuItems = [
+  { label: 'Home', icon: 'pi pi-fw pi-home', to: '/' },
+  { label: 'Exponentielle Glättung', icon: 'pi pi-fw pi-home', to: '/smoothing' },
+  { label: 'DMS', icon: 'pi pi-fw pi-pencil', to: '/dms' }
 ]
 
 import { RlogHandler } from './RlogHandler'
@@ -73,7 +59,7 @@ function paramChangeAction({ name , after }) {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0.5em;
 }
 .app-container {
   text-align: left;

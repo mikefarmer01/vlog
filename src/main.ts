@@ -10,4 +10,5 @@ import 'primeicons/primeicons.css' // icons
 // #endregion.
 
 import { createPinia } from 'pinia'
-createApp(App).use(createPinia()).use(PrimeVue).mount('#app')
+import { router } from './router'
+createApp(App).use(createPinia()).use(router).use(PrimeVue).mount('#app')

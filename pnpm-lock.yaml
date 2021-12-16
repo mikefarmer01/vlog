@@ -16,6 +16,7 @@ specifiers:
   unplugin-vue-components: ^0.17.8
   vite: ^2.7.1
   vue: ^3.2.24
+  vue-router: '4'
 
 dependencies:
   pinia: 2.0.6_typescript@4.5.3+vue@3.2.24
@@ -23,6 +24,7 @@ dependencies:
   primeicons: 5.0.0
   primevue: 3.9.1_primeicons@5.0.0+vue@3.2.24
   vue: 3.2.24
+  vue-router: 4.0.12_vue@3.2.24
 
 devDependencies:
   '@fullhuman/postcss-purgecss': 4.1.3_postcss@8.4.4
@@ -1531,6 +1533,15 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /vue-router/4.0.12_vue@3.2.24:
+    resolution: {integrity: sha512-CPXvfqe+mZLB1kBWssssTiWg4EQERyqJZes7USiqfW9B5N2x+nHlnsM1D3b5CaJ6qgCvMmYJnz+G0iWjNCvXrg==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      '@vue/devtools-api': 6.0.0-beta.20.1
+      vue: 3.2.24
+    dev: false
 
   /vue/3.2.24:
     resolution: {integrity: sha512-PvCklXNfcUMyeP/a9nME27C32IipwUDoS45rDyKn5+RQrWyjL+0JAJtf98HL6y9bfqQRTlYjSowWEB1nXxvG5Q==}

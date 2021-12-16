@@ -70,7 +70,7 @@
 import FieldSet from 'primevue/fieldset/sfc'
 import { computed } from 'vue'
 
-import { useStore } from '../store'
+import { useStore } from '../../../store'
 const store = useStore()
 
 //#region Computed properties

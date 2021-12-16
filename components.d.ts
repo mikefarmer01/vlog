@@ -4,12 +4,16 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Card: typeof import('primevue/card')['default']
     Column: typeof import('primevue/column')['default']
     DataTable: typeof import('primevue/datatable')['default']
-    DemandData: typeof import('./src/components/DemandData.vue')['default']
-    DemandParams: typeof import('./src/components/DemandParams.vue')['default']
-    DemandPlot: typeof import('./src/components/DemandPlot.vue')['default']
+    DemandData: typeof import('./src/components/apps/smoothing/DemandData.vue')['default']
+    DemandParams: typeof import('./src/components/apps/smoothing/DemandParams.vue')['default']
+    DemandPlot: typeof import('./src/components/apps/smoothing/DemandPlot.vue')['default']
+    DMS: typeof import('./src/components/apps/dms/DMS.vue')['default']
+    HoMe: typeof import('./src/components/HoMe.vue')['default']
     InputText: typeof import('primevue/inputtext')['default']
+    Smoothing: typeof import('./src/components/apps/smoothing/Smoothing.vue')['default']
     Splitter: typeof import('primevue/splitter')['default']
     SplitterPanel: typeof import('primevue/splitterpanel')['default']
     TabMenu: typeof import('primevue/tabmenu')['default']
